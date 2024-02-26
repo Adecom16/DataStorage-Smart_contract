@@ -1,18 +1,17 @@
 import { ethers } from "hardhat";
 
 async function main() {
-  const SimpleStorageFactory = await ethers.getContractFactory(
-    "SimpleStorageFactory"
-  );
-  const factory = await SimpleStorageFactory.deploy();
-//   await factory.deployed();
-  console.log("Factory deployed to:", factory.address);
+  const contractAddress = "0x2638272CC3C60Dd3F4017261f39f8cb3A32EC2f0";
+  const SimpleStorage = await ethers.getContractFactory("SimpleStorage");
+  const simpleStorage = SimpleStorage.attach(contractAddress);
 
-  // Call the createSimpleStorage function
-  const tx = await factory.createSimpleStorage();
-  await tx.wait();
 
-  console.log("SimpleStorage created:", tx.events[0].args[1]);
+  const setDataTx = await simpleStorage.setData("Hello, world!");
+  await setDataTx.wait();
+  console.log("Data set successfully!");
+
+  const getData = await simpleStorage.getData();
+  console.log("Retrieved data:", getData);
 }
 
 main()
