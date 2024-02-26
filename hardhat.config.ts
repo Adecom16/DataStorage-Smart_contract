@@ -7,7 +7,7 @@ import "@nomicfoundation/hardhat-toolbox";
 module.exports = {
   solidity: "0.8.24",
   networks: {
-    mumbai: {
+    sepolia: {
       url: process.env.ALCHEMY_API_KEY,
       accounts: [process.env.ACCOUNT_PRIVATE_KEY],
     },
